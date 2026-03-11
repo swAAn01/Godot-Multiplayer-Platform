@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjugfndbiagm1"]
 
-[ext_resource type="Script" uid="uid://ch4t84askghae" path="res://Menus/scripts/join_popup.gd" id="1_ykuld"]
+[ext_resource type="Script" uid="uid://ch4t84askghae" path="res://menus/scripts/join_popup.gd" id="1_ykuld"]
 
 [node name="JoinPopup" type="ColorRect" unique_id=1248706963]
 anchors_preset = 8
@@ -46,22 +46,6 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FriendContainer" type="ScrollContainer" parent="." unique_id=1110856129]
-visible = false
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -254.5
-offset_bottom = 271.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemList" type="VBoxContainer" parent="FriendContainer" unique_id=1813871283]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="CloseButton" type="Button" parent="." unique_id=147625363]
 layout_mode = 1
 anchors_preset = 3
@@ -77,21 +61,6 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "Close"
-
-[node name="FriendToggle" type="CheckButton" parent="." unique_id=1591071208]
-layout_mode = 0
-offset_left = 173.5
-offset_top = 61.5
-offset_right = 217.5
-offset_bottom = 85.5
-
-[node name="FriendLabel" type="Label" parent="." unique_id=394993105]
-layout_mode = 0
-offset_left = 12.5
-offset_top = 60.5
-offset_right = 166.5
-offset_bottom = 83.5
-text = "Friend Lobbies Only"
 
 [node name="RefreshButton" type="Button" parent="." unique_id=970890373]
 layout_mode = 0

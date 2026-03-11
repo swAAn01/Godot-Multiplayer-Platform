@@ -28,11 +28,11 @@ func _ready() -> void:
 	quit_button.pressed.connect(func() -> void: get_tree().quit())
 	fail_button.pressed.connect(_on_fail_button_pressed)
 	host_failed_button.pressed.connect(func() -> void: hosting_overlay.hide())
-	EventBus.meta_events.joining_lobby.connect(_on_joining_lobby)
-	EventBus.meta_events.creating_lobby.connect(_on_creating_lobby)
-	EventBus.meta_events.join_lobby_failed.connect(_on_join_failed)
+	#MultiplayerService.joining_lobby.connect(_on_joining_lobby) TODO setup these signals
+	#MultiplayerService.creating_lobby.connect(_on_creating_lobby)
+	#MultiplayerService.join_lobby_failed.connect(_on_join_failed)
 	if not MultiplayerService.kick_reason.is_empty():
-		show_kick_reason(MultiplayerService.kick_reason)
+		_show_kick_reason(MultiplayerService.kick_reason)
 
 
 func _on_host_button_pressed() -> void:
@@ -42,11 +42,6 @@ func _on_host_button_pressed() -> void:
 
 func _on_join_button_pressed() -> void:
 	var popup: JoinPopup = join_popup.instantiate()
-	add_child(popup)
-
-
-func _on_settings_button_pressed() -> void:
-	var popup: SettingsPopup = settings_popup.instantiate()
 	add_child(popup)
 
 
@@ -87,7 +82,7 @@ func _on_fail_button_pressed() -> void:
 	host_button.grab_focus()
 
 
-func show_kick_reason(reason: String) -> void:
+func _show_kick_reason(reason: String) -> void:
 	joining_overlay.show()
 	joining_label.hide()
 	fail_label.text = reason

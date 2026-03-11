@@ -10,11 +10,9 @@ const MIN_PLAYERS := 1
 @onready var name_edit: TextEdit = $Options/GameName/TextEdit
 @onready var up_button: Button = $Options/MaxPlayers/Buttons/UpButton
 @onready var down_button: Button = $Options/MaxPlayers/Buttons/DownButton
-@onready var type_option: OptionButton = $Options/Visibility/Options
 @onready var host_button: Button = $HostButton
 @onready var close_button: Button = $CloseButton
 @onready var count_label: Label = $Options/MaxPlayers/CountLabel
-@onready var visibility: HBoxContainer = $Options/Visibility
 
 
 var last_edit_text: String
@@ -62,6 +60,4 @@ func _on_host_button_pressed() -> void:
 	var options := HostOptions.new()
 	options.max_players = int(count_label.text)
 	options.lobby_name = name_edit.placeholder_text if name_edit.text.is_empty() else name_edit.text
-	options.lobby_visibility = type_option.get_selected_id() as Steam.LobbyType
 	MultiplayerService.host_game(options)
-	EventBus.meta_events.creating_lobby.emit()

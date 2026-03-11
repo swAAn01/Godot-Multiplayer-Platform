@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func start_game() -> void:
 	if multiplayer.is_server():
-		await level_loader.spawn_scene('base')
+		await level_loader.spawn_level('example')
 		player_spawner.spawn_player(1)
 	else:
 		await multiplayer.connected_to_server

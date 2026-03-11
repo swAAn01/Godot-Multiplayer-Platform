@@ -26,8 +26,9 @@ func _on_peer_disconnected(peer_id: int) -> void:
 func spawn_player(id: int) -> void:
 	var player: Player = player_scene.instantiate()
 	player.name = str(id)
-	player.owner = self
 	add_child.call_deferred(player)
+	await player.tree_entered
+	player.owner = self
 
 
 func remove_player(id: int) -> void:
