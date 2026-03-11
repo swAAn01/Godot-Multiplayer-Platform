@@ -73,6 +73,7 @@ func _kick_player_rpc(kicked: bool) -> void:
 		kick_reason = KICK_REASON_KICKED
 	else:
 		kick_reason = KICK_REASON_BANNED
+	leave_game()
 
 
 func ban_player(peer_id: int) -> void:
