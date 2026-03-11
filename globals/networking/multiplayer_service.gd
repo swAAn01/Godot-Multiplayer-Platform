@@ -1,6 +1,10 @@
 extends Node
 
 
+const KICK_REASON_KICKED := "You were kicked."
+const KICK_REASON_BANNED := "You are banned from this lobby."
+
+
 ## Add a new entry for each [MultiplayerBackend].
 enum BackendType {ENET}
 
@@ -10,15 +14,22 @@ var banlist: Array
 var kick_reason: String
 
 
+signal lobby_joined
+signal lobby_found(address: Variant, cur_players: int, max_players: int)
+
+
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	_init_backend(BackendType.ENET)
 
 
+## Modify for each [enum BackendType] you want to support.
 func _init_backend(type: BackendType) -> void:
 	match type:
 		BackendType.ENET:
 			backend = ENetBackend.new()
+	backend.lobby_found.connect(lobby_found.emit)
+	backend.joined.connect(lobby_joined.emit)
 	add_child(backend)
 
 
@@ -59,9 +70,9 @@ func kick_player(peer_id: int) -> void:
 @rpc("authority", "call_remote", "reliable")
 func _kick_player_rpc(kicked: bool) -> void:
 	if kicked:
-		kick_reason = "You were kicked."
+		kick_reason = KICK_REASON_KICKED
 	else:
-		kick_reason = "You are banned from this lobby."
+		kick_reason = KICK_REASON_BANNED
 
 
 func ban_player(peer_id: int) -> void:

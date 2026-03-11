@@ -1,12 +1,18 @@
 class_name ENetBackend
 extends MultiplayerBackend
+## [b]An example implementation of [MultiplayerBackend].[/b][br][br]
+## Allows us to establish a connection using [ENetMultiplayerPeer],
+## hosting by passing in [HostOptions]; and joining by passing in an IP or MAC
+## address as a [String].
 
 
-const GAME_PORT := 8404
-const SEARCH_PORT := 2646
+const GAME_PORT := 3005
+const SEARCH_PORT := 90210
 const BROADCAST_ADDRESS := "255.255.255.255"
+const GREETING_MESSAGE := "Anyone there?"
 
 
+## Used by lobby hosts to listen for other instances looking for a game.
 var search_server := UDPServer.new()
 var search_peer := PacketPeerUDP.new()
 var max_players: int
@@ -18,6 +24,10 @@ func _ready() -> void:
 	search_peer.set_broadcast_enabled(true)
 
 
+## [b]Polls the Local Area Network for lobbies.[/b]
+## If this instance is a host, we listen for packets from other instances searching for a lobby.
+## If we receive one, we send back a packet containing our lobby's information.[br]
+## As an instance looking for a game, we emit [signal lobby_found] if we receive a packet containing lobby information.
 func _process(_delta: float) -> void:
 	if search_server.is_listening():
 		assert(multiplayer.is_server())
@@ -27,30 +37,33 @@ func _process(_delta: float) -> void:
 			var packet_str := "%s,%d,%d" % [lobby_name, multiplayer.get_peers().size() + 1, max_players]
 			ppeer.put_packet(packet_str.to_utf8_buffer())
 	while search_peer.get_available_packet_count() > 0:
-		assert(not multiplayer.has_multiplayer_peer())
 		assert(not search_server.is_listening())
 		var ip := search_peer.get_packet_ip()
 		var packet := search_peer.get_packet().get_string_from_utf8().split(',')
-		EventBus.meta_events.lobby_found.emit(ip, packet[0], int(packet[1]), int(packet[2]))
+		lobby_found.emit(ip, packet[0], int(packet[1]), int(packet[2]))
 
 
+## Hosts a lobby using the maximum number of players and lobby name specified in [param options].
 func host_game(options: HostOptions) -> void:
-	assert(not multiplayer.has_multiplayer_peer())
 	print("Creating ENet lobby...")
 	max_players = options.max_players
 	lobby_name = options.lobby_name
 	var peer := ENetMultiplayerPeer.new()
-	peer.create_server(GAME_PORT, max_players - 1)
-	multiplayer.set_multiplayer_peer(peer)
-	EventBus.meta_events.lobby_joined.emit()
+	var err := peer.create_server(GAME_PORT, max_players - 1)
+	if err == OK:
+		multiplayer.set_multiplayer_peer(peer)
+		lobby_joined.emit()
 
 
+## Joins a lobby hosted at IP address [param address].
 func join_game(address: Variant) -> void:
-	assert(not multiplayer.has_multiplayer_peer())
+	var addr := address as String
+	print("Joining ENet lobby at %s..." % addr)
 	var peer := ENetMultiplayerPeer.new()
-	peer.create_client(address as String, GAME_PORT)
-	multiplayer.set_multiplayer_peer(peer)
-	EventBus.meta_events.lobby_joined.emit()
+	var err := peer.create_client(addr, GAME_PORT)
+	if err == OK:
+		multiplayer.set_multiplayer_peer(peer)
+		lobby_joined.emit()
 
 
 func leave_game() -> void:
@@ -59,31 +72,31 @@ func leave_game() -> void:
 	search_server.stop()
 
 
+## Sends a packet over the [constant BROADCAST_ADDRESS] to request lobby information from other instances on the LAN.
 func fetch_lobby_list() -> void:
-	assert(not multiplayer.has_multiplayer_peer())
 	assert(not search_server.is_listening())
+	assert(not multiplayer.is_server())
 	print_debug("Searching For Games over LAN...")
-	search_peer.put_packet("Anyone there?".to_utf8_buffer())
+	search_peer.put_packet(GREETING_MESSAGE.to_utf8_buffer())
 
 
 func set_joinable(joinable: bool) -> void:
-	assert(multiplayer.is_server())
-	print_debug("Setting ENet Lobby Joinable: " + str(joinable))
+	print_debug("Setting ENet Lobby Joinable=" + str(joinable))
 	if joinable:
-		search_server.listen(SEARCH_PORT)
+		search_server.listen(SEARCH_PORT) # for some reason setting the bind address to the broadcast address doesn't work here
 	else:
 		search_server.stop()
 
 
-func get_uid(pid: int) -> String:
-	var peer := (multiplayer.multiplayer_peer as ENetMultiplayerPeer).get_peer(pid)
+## UID is IP or MAC address.
+## If for some reason we can't find that, just return [param peer_id] as a [String].
+func get_uid(peer_id: int) -> String:
+	var peer := (multiplayer.multiplayer_peer as ENetMultiplayerPeer).get_peer(peer_id)
 	if peer:
 		return peer.get_remote_address()
 	else:
-		return str(pid)
+		return str(peer_id)
 
 
 func get_username(peer_id: int) -> String:
-	if SteamBackend.steam_initialized and peer_id == multiplayer.get_unique_id():
-		return Steam.getPersonaName()
 	return str(peer_id)
