@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://cwsy6ot38bu4w"]
-
-[ext_resource type="Script" uid="uid://cd1b7rpxgj5d2" path="res://master/scripts/player_spawner.gd" id="1_4yj1v"]
-
-[node name="PlayerSpawner" type="MultiplayerSpawner" unique_id=1939309751]
-_spawnable_scenes = PackedStringArray("uid://fff2awjtd2uk")
-spawn_path = NodePath(".")
-script = ExtResource("1_4yj1v")
