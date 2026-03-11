@@ -32,123 +32,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Resume"
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=252032087]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Settings"
-
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1191948847]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Main Menu"
-
-[node name="DevToolContainer" type="VBoxContainer" parent="." unique_id=795785044]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.5
-anchor_right = 0.1
-anchor_bottom = 0.5
-offset_top = -151.0
-offset_right = 204.0
-offset_bottom = 151.0
-grow_vertical = 2
-theme_override_constants/separation = 64
-
-[node name="Label" type="Label" parent="DevToolContainer" unique_id=812565507]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Dev Tools"
-horizontal_alignment = 1
-
-[node name="RespawnButton" type="Button" parent="DevToolContainer" unique_id=1163871700]
-layout_mode = 2
-text = "RESPAWN"
-
-[node name="Label2" type="Label" parent="DevToolContainer" unique_id=1541881404]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Character Customization"
-horizontal_alignment = 1
-
-[node name="FixingToolSelector" type="HBoxContainer" parent="DevToolContainer" unique_id=1717565023]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DevToolContainer/FixingToolSelector" unique_id=852135951]
-layout_mode = 2
-text = "Fixing Tools"
-
-[node name="OptionButton" type="OptionButton" parent="DevToolContainer/FixingToolSelector" unique_id=1859175198]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-selected = 0
-item_count = 3
-popup/item_0/text = "Hammer"
-popup/item_0/id = 0
-popup/item_1/text = "Wrench"
-popup/item_1/id = 1
-popup/item_2/text = "Welder"
-popup/item_2/id = 2
-
-[node name="Mouth" type="HBoxContainer" parent="DevToolContainer" unique_id=911989556]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DevToolContainer/Mouth" unique_id=616578979]
-layout_mode = 2
-text = "Mouth Variant"
-
-[node name="HSlider" type="HSlider" parent="DevToolContainer/Mouth" unique_id=146310033]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="IndexLabel" type="Label" parent="DevToolContainer/Mouth" unique_id=817158980]
-layout_mode = 2
-text = "11"
-
-[node name="Eyes" type="HBoxContainer" parent="DevToolContainer" unique_id=1703376615]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DevToolContainer/Eyes" unique_id=1907444047]
-layout_mode = 2
-text = "Eyes Variant"
-
-[node name="HSlider" type="HSlider" parent="DevToolContainer/Eyes" unique_id=276464292]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="IndexLabel" type="Label" parent="DevToolContainer/Eyes" unique_id=1247272972]
-layout_mode = 2
-text = "11"
-
-[node name="Brows" type="HBoxContainer" parent="DevToolContainer" unique_id=2037202689]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DevToolContainer/Brows" unique_id=1042730791]
-layout_mode = 2
-text = "Brows Variant"
-
-[node name="HSlider" type="HSlider" parent="DevToolContainer/Brows" unique_id=832068084]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="IndexLabel" type="Label" parent="DevToolContainer/Brows" unique_id=1569168409]
-layout_mode = 2
-text = "11"
-
-[node name="ColorPicker" type="HBoxContainer" parent="DevToolContainer" unique_id=1113388662]
-layout_mode = 2
-theme_override_constants/separation = 128
-
-[node name="Label" type="Label" parent="DevToolContainer/ColorPicker" unique_id=1673913171]
-layout_mode = 2
-text = "Color"
-
-[node name="ColorPickerButton" type="ColorPickerButton" parent="DevToolContainer/ColorPicker" unique_id=441829421]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 8
 
 [node name="VoipContainer" type="VBoxContainer" parent="." unique_id=1576799857]
 layout_mode = 1
@@ -158,12 +45,3 @@ anchor_top = 0.1
 anchor_right = 0.95
 anchor_bottom = 0.4
 grow_horizontal = 0
-
-[node name="Invite" type="Button" parent="." unique_id=1503464254]
-visible = false
-layout_mode = 0
-offset_left = 1518.0
-offset_top = 454.0
-offset_right = 1630.0
-offset_bottom = 485.0
-text = "Invite Friends"

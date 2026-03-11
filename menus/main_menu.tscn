@@ -36,11 +36,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Join Game"
 
-[node name="SettingsButton" type="Button" parent="Buttons" unique_id=796476244]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Settings"
-
 [node name="QuitButton" type="Button" parent="Buttons" unique_id=1279837957]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
