@@ -29,7 +29,7 @@ func _init_backend(type: BackendType) -> void:
 		BackendType.ENET:
 			backend = ENetBackend.new()
 	backend.lobby_found.connect(lobby_found.emit)
-	backend.joined.connect(lobby_joined.emit)
+	backend.lobby_joined.connect(lobby_joined.emit)
 	add_child(backend)
 
 

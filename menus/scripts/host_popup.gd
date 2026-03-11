@@ -26,8 +26,6 @@ func _ready() -> void:
 	down_button.pressed.connect(_on_down_button_pressed)
 	host_button.pressed.connect(_on_host_button_pressed)
 	close_button.pressed.connect(func() -> void: queue_free())
-	if MultiplayerService.backend is SteamBackend:
-		visibility.show()
 
 
 func _on_edit_text_changed() -> void:

@@ -1,4 +1,5 @@
-class_name VoipManager extends Node
+class_name VoipManager
+extends Node
 
 
 const MIC_BUS_NAME := "Microphone"

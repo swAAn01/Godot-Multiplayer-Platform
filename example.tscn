@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dltcmsd3purl0"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" unique_id=169104357]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=39434125]
+size = Vector3(16, 1, 16)
