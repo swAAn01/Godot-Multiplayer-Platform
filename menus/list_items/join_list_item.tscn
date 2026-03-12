@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://burlpkae25t88"]
 
-[ext_resource type="Script" uid="uid://c8e1lrpocds7s" path="res://Menus/scripts/join_list_item.gd" id="1_4wvrw"]
+[ext_resource type="Script" uid="uid://c8e1lrpocds7s" path="res://menus/list_items/scripts/join_list_item.gd" id="1_4wvrw"]
 
 [node name="JoinListItem" type="HBoxContainer" unique_id=864522119]
 anchors_preset = 14

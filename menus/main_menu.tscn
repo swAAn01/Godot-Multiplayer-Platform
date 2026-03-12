@@ -36,11 +36,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Join Game"
 
-[node name="SettingsButton" type="Button" parent="Buttons" unique_id=796476244]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Settings"
-
 [node name="QuitButton" type="Button" parent="Buttons" unique_id=1279837957]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -59,6 +54,7 @@ focus_mode = 1
 color = Color(0.23921569, 0.23921569, 0.23921569, 0.4392157)
 
 [node name="JoiningLabel" type="Label" parent="JoiningOverlay" unique_id=280832995]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -75,7 +71,6 @@ theme_override_font_sizes/font_size = 128
 text = "Joining Game..."
 
 [node name="FailedLabel" type="Label" parent="JoiningOverlay" unique_id=1842562292]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -92,7 +87,6 @@ theme_override_font_sizes/font_size = 64
 text = "Failed. Reason:"
 
 [node name="FailedButton" type="Button" parent="JoiningOverlay" unique_id=1191714102]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

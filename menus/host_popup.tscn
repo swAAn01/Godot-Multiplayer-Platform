@@ -1,17 +1,13 @@
 [gd_scene format=3 uid="uid://d0yvjw3bvjxkq"]
 
-[ext_resource type="Script" uid="uid://cq2wjkr5rbohx" path="res://Menus/scripts/host_popup.gd" id="1_5ld63"]
+[ext_resource type="Script" uid="uid://cq2wjkr5rbohx" path="res://menus/scripts/host_popup.gd" id="1_5ld63"]
 
 [node name="HostPopup" type="ColorRect" unique_id=1553912510]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -254.5
-offset_top = -359.5
-offset_right = 254.5
-offset_bottom = 359.5
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.403922, 0.0666667, 1)
@@ -88,52 +84,26 @@ text = "^"
 layout_mode = 2
 text = "v"
 
-[node name="Visibility" type="HBoxContainer" parent="Options" unique_id=1350734145]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Options/Visibility" unique_id=1241604573]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Lobby Type"
-
-[node name="Options" type="OptionButton" parent="Options/Visibility" unique_id=511303924]
-layout_mode = 2
-size_flags_horizontal = 3
-selected = 0
-item_count = 3
-popup/item_0/text = "Invite Only"
-popup/item_0/id = 0
-popup/item_1/text = "Friends Only"
-popup/item_1/id = 1
-popup/item_2/text = "Public"
-popup/item_2/id = 2
-
 [node name="HostButton" type="Button" parent="." unique_id=618384268]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 72.5
-offset_top = -173.5
-offset_right = 134.5
-offset_bottom = -131.5
-grow_vertical = 0
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.8
+anchor_right = 0.4
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "Host"
 
 [node name="CloseButton" type="Button" parent="." unique_id=170630377]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -116.5
-offset_top = -171.5
-offset_right = -46.5
-offset_bottom = -129.5
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = -1
+anchor_left = 0.6
+anchor_top = 0.8
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "Close"
