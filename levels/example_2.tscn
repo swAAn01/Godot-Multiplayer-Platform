@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://dltcmsd3purl0"]
+[gd_scene format=3 uid="uid://bhslj1aklcv1q"]
 
-[ext_resource type="Texture2D" uid="uid://dlefk7rtyu8jb" path="res://01_PrototypeCheckerBig_2048.png" id="1_2jas5"]
+[ext_resource type="Texture2D" uid="uid://b5dvig6y2tt41" path="res://assets/01_PrototypeCheckerSmall_2048.png" id="1_s3j67"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n51mc"]
-albedo_texture = ExtResource("1_2jas5")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aiulw"]
+albedo_texture = ExtResource("1_s3j67")
 uv1_triplanar = true
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6gkck"]
@@ -20,7 +20,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" unique_id=169104357]
-material_overlay = SubResource("StandardMaterial3D_n51mc")
+material_overlay = SubResource("StandardMaterial3D_aiulw")
 use_collision = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1292072398]

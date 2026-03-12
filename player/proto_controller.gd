@@ -64,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if is_multiplayer_authority():
+	if is_multiplayer_authority() and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Apply gravity to velocity
 		if has_gravity:
 			if not is_on_floor():
