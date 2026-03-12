@@ -26,7 +26,8 @@ func start_game() -> void:
 
 
 func exit_to_main_menu() -> void:
-	player_spawner.clear_players()
-	level_loader.clear_level()
-	main_menu = main_menu_scene.instantiate()
-	add_child(main_menu)
+	if main_menu == null: # ignore if the signal was called while we're still on the main menu
+		player_spawner.clear_players()
+		level_loader.clear_level()
+		main_menu = main_menu_scene.instantiate()
+		add_child(main_menu)

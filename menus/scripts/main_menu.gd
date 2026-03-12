@@ -52,6 +52,7 @@ func _on_joining_lobby() -> void:
 	fail_label.hide()
 	fail_button.hide()
 	await get_tree().create_timer(TIMEOUT_DUR).timeout
+	push_error("Timed out while trying to join game.")
 	_on_join_failed("Timed out.")
 
 
