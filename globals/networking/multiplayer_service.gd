@@ -14,8 +14,11 @@ var banlist: Array
 var kick_reason: String
 
 
-signal lobby_joined
 signal lobby_found(address: Variant, cur_players: int, max_players: int)
+signal joining_lobby
+signal lobby_joined
+signal creating_lobby
+signal join_lobby_failed(reason: String)
 signal game_exited
 
 
@@ -31,11 +34,13 @@ func _init_backend(type: BackendType) -> void:
 			backend = ENetBackend.new()
 	backend.lobby_found.connect(lobby_found.emit)
 	backend.lobby_joined.connect(lobby_joined.emit)
+	backend.join_lobby_failed.connect(join_lobby_failed.emit)
 	add_child(backend)
 
 
 func host_game(options: HostOptions) -> void:
 	assert(not multiplayer.has_multiplayer_peer() or multiplayer.get_multiplayer_peer() is OfflineMultiplayerPeer)
+	creating_lobby.emit()
 	if options.max_players == 1:
 		multiplayer.set_multiplayer_peer(OfflineMultiplayerPeer.new())
 	else:
@@ -44,6 +49,7 @@ func host_game(options: HostOptions) -> void:
 
 func join_game(address: Variant) -> void:
 	assert(not multiplayer.has_multiplayer_peer() or multiplayer.get_multiplayer_peer() is OfflineMultiplayerPeer)
+	joining_lobby.emit()
 	backend.join_game(address)
 
 

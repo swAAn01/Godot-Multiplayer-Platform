@@ -53,6 +53,8 @@ func host_game(options: HostOptions) -> void:
 	if err == OK:
 		multiplayer.set_multiplayer_peer(peer)
 		lobby_joined.emit()
+	else:
+		join_lobby_failed.emit(str(err))
 
 
 ## Joins a lobby hosted at IP address [param address].
@@ -64,6 +66,8 @@ func join_game(address: Variant) -> void:
 	if err == OK:
 		multiplayer.set_multiplayer_peer(peer)
 		lobby_joined.emit()
+	else:
+		join_lobby_failed.emit(str(err))
 
 
 func leave_game() -> void:

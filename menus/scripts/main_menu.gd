@@ -28,9 +28,9 @@ func _ready() -> void:
 	quit_button.pressed.connect(func() -> void: get_tree().quit())
 	fail_button.pressed.connect(_on_fail_button_pressed)
 	host_failed_button.pressed.connect(func() -> void: hosting_overlay.hide())
-	#MultiplayerService.joining_lobby.connect(_on_joining_lobby) TODO setup these signals
-	#MultiplayerService.creating_lobby.connect(_on_creating_lobby)
-	#MultiplayerService.join_lobby_failed.connect(_on_join_failed)
+	MultiplayerService.joining_lobby.connect(_on_joining_lobby)
+	MultiplayerService.join_lobby_failed.connect(_on_join_failed)
+	MultiplayerService.creating_lobby.connect(_on_creating_lobby)
 	if not MultiplayerService.kick_reason.is_empty():
 		_show_kick_reason(MultiplayerService.kick_reason)
 

@@ -7,6 +7,7 @@ extends Node
 @warning_ignore_start('unused_signal')
 signal lobby_found(address: Variant, cur_players: int, max_players: int)
 signal lobby_joined
+signal join_lobby_failed(reason: String)
 @warning_ignore_restore('unused_signal')
 
 
