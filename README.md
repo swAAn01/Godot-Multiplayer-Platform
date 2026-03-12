@@ -31,7 +31,7 @@ The `PlayerSpawner` handles the spawning and despawning of player characters. It
 
 ### `MultiplayerService`
 
-`MultiplayerService` is a high-level interface masking a `MultiplayerBackend`, which we'll talk about later. It exposes signals so that the game state can respond to events like lobby joining and leaving, and methods to initiate those events. The majority of the logic simply acts as a relay between the `MultiplayerBackend` and the rest of the game.
+`MultiplayerService` is a high-level interface masking a `MultiplayerBackend`, which we'll talk about later. It exposes signals so that the game state can respond to events like lobby joining and leaving, and methods to initiate those events. The majority of the logic simply acts as a relay between the `MultiplayerBackend` and the rest of the game. The reason we do this as opposed to just exposing the `MultiplayerBackend` directly is so that we can select or swap out our `MultiplayerBackend` at runtime.
 
 ### `MultiplayerBackend`
 
