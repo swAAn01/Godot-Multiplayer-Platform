@@ -5,7 +5,8 @@ extends Node
 
 const WAIT_INTERVAL := 0.1
 const LEVEL_DICT: Dictionary[String, String] = {
-	'example': 'uid://dltcmsd3purl0'
+	'example': 'uid://dltcmsd3purl0',
+	'example-2': 'uid://bhslj1aklcv1q'
 }
 
 
