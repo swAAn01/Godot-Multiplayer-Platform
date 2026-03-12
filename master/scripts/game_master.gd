@@ -18,6 +18,7 @@ func start_game() -> void:
 	if multiplayer.is_server():
 		await level_loader.spawn_level('example')
 		player_spawner.spawn_player(1)
+		MultiplayerService.set_joinable(true)
 	else:
 		await multiplayer.connected_to_server
 	main_menu.queue_free()

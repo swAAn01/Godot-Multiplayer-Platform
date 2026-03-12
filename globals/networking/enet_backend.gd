@@ -75,7 +75,7 @@ func leave_game() -> void:
 ## Sends a packet over the [constant BROADCAST_ADDRESS] to request lobby information from other instances on the LAN.
 func fetch_lobby_list() -> void:
 	assert(not search_server.is_listening())
-	assert(not multiplayer.is_server())
+	assert(not multiplayer.is_server() or (multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer is OfflineMultiplayerPeer))
 	print_debug("Searching For Games over LAN...")
 	search_peer.put_packet(GREETING_MESSAGE.to_utf8_buffer())
 
