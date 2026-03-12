@@ -5,7 +5,7 @@ extends Node
 
 
 @warning_ignore_start('unused_signal')
-signal lobby_found(address: Variant, cur_players: int, max_players: int)
+signal lobby_found(lobby_name: String, address: Variant, cur_players: int, max_players: int)
 signal lobby_joined
 signal join_lobby_failed(reason: String)
 @warning_ignore_restore('unused_signal')
@@ -35,7 +35,7 @@ func fetch_lobby_list() -> void
 
 func close_peer() -> void:
 	if multiplayer.has_multiplayer_peer():
-		multiplayer.multiplayer_peer.close()
+		multiplayer.get_multiplayer_peer().close()
 		multiplayer.set_multiplayer_peer(null)
 
 

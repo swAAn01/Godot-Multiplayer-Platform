@@ -8,3 +8,4 @@ extends Resource
 
 var max_players: int
 var lobby_name: String
+var lobby_type: Steam.LobbyType
