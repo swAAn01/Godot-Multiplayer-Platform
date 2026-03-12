@@ -91,7 +91,7 @@ func ban_player(peer_id: int) -> void:
 
 
 func _on_peer_connected(peer_id: int) -> void:
-	if banlist.has(backend.get_uid(peer_id)):
+	if not backend.get_joinable() or banlist.has(backend.get_uid(peer_id)):
 		kick_player(peer_id)
 
 

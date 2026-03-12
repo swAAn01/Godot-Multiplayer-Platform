@@ -39,8 +39,16 @@ func close_peer() -> void:
 		multiplayer.set_multiplayer_peer(null)
 
 
+## Many multiplayer backends will have a method to prevent other players from joining.
+## At a bare minimum, we should set a flag that we can return to for [method get_joinable].
 @abstract
 func set_joinable(joinable: bool) -> void
+
+
+## Called by the server when a peer connects to validate that we are expecting joins.
+## If we aren't, then we can kick that peer.
+@abstract
+func get_joinable() -> bool
 
 
 ## Generates or retrieves a unique identifier for the peer given by [param peer_id].
