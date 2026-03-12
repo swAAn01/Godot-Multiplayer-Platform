@@ -39,8 +39,8 @@ func _process(_delta: float) -> void:
 	while search_peer.get_available_packet_count() > 0:
 		assert(not search_server.is_listening())
 		var ip := search_peer.get_packet_ip()
+		var packet := search_peer.get_packet().get_string_from_utf8().split(',')
 		if ip != null and not ip.is_empty():
-			var packet := search_peer.get_packet().get_string_from_utf8().split(',')
 			lobby_found.emit(ip, packet[0], int(packet[1]), int(packet[2]))
 
 
