@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dlefk7rtyu8jb"
-path.s3tc="res://.godot/imported/01_PrototypeCheckerBig_2048.png-96a2e3d802789c6ee682b725b6a7ee26.s3tc.ctex"
+path.s3tc="res://.godot/imported/01_PrototypeCheckerBig_2048.png-98fb19b01b3f3e961dc455eaf2a8caee.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://01_PrototypeCheckerBig_2048.png"
-dest_files=["res://.godot/imported/01_PrototypeCheckerBig_2048.png-96a2e3d802789c6ee682b725b6a7ee26.s3tc.ctex"]
+source_file="res://assets/01_PrototypeCheckerBig_2048.png"
+dest_files=["res://.godot/imported/01_PrototypeCheckerBig_2048.png-98fb19b01b3f3e961dc455eaf2a8caee.s3tc.ctex"]
 
 [params]
 

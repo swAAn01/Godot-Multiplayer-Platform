@@ -13,7 +13,7 @@ config_version=5
 config/name="Multiplayer Platform"
 run/main_scene="uid://cb2i8xids6lw2"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.svg"
 
 [autoload]
 
