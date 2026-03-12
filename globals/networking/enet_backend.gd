@@ -22,6 +22,7 @@ var lobby_name: String
 func _ready() -> void:
 	search_peer.set_dest_address(BROADCAST_ADDRESS, SEARCH_PORT)
 	search_peer.set_broadcast_enabled(true)
+	multiplayer.peer_connected.connect(_on_peer_connected)
 
 
 ## [b]Polls the Local Area Network for lobbies.[/b]
@@ -107,3 +108,9 @@ func get_uid(peer_id: int) -> String:
 
 func get_username(peer_id: int) -> String:
 	return str(peer_id)
+
+
+func _on_peer_connected(peer_id: int) -> void:
+	if multiplayer.is_server() and not search_server.is_listening():
+		print_debug("Peer %d Joined Unexpectedly from address %s. Kicking..." % [peer_id, get_uid(peer_id)])
+		(get_parent() as MultiplayerService).kick_player(peer_id)
