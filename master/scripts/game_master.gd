@@ -11,6 +11,7 @@ extends Node
 
 func _ready() -> void:
 	MultiplayerService.lobby_joined.connect(start_game)
+	MultiplayerService.game_exited.connect(exit_to_main_menu)
 	multiplayer.server_disconnected.connect(exit_to_main_menu)
 
 
@@ -25,7 +26,6 @@ func start_game() -> void:
 
 
 func exit_to_main_menu() -> void:
-	MultiplayerService.leave_game()
 	player_spawner.clear_players()
 	level_loader.clear_level()
 	main_menu = main_menu_scene.instantiate()

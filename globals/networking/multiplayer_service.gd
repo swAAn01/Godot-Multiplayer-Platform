@@ -16,6 +16,7 @@ var kick_reason: String
 
 signal lobby_joined
 signal lobby_found(address: Variant, cur_players: int, max_players: int)
+signal game_exited
 
 
 func _ready() -> void:
@@ -50,6 +51,7 @@ func leave_game() -> void:
 	assert(multiplayer.has_multiplayer_peer())
 	backend.leave_game()
 	banlist.clear()
+	game_exited.emit()
 
 
 func fetch_lobby_list() -> void:

@@ -24,11 +24,13 @@ extends CharacterBody3D
 var mouse_captured : bool = false
 var look_rotation : Vector2
 var move_speed : float = 0.0
+var pause_menu: PauseMenu
 
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
 @onready var camera: Camera3D = $Head/Camera3D
+@onready var pause_menu_packed: PackedScene = preload("uid://uleq8uyf6eq7")
 
 
 func _enter_tree() -> void:
@@ -46,11 +48,16 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_multiplayer_authority():
-		# Mouse capturing
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			_capture_mouse()
+		# Pausing
 		if Input.is_key_pressed(KEY_ESCAPE):
-			_release_mouse()
+			if pause_menu == null:
+				_release_mouse()
+				pause_menu = pause_menu_packed.instantiate()
+				add_child(pause_menu)
+			else:
+				pause_menu.queue_free()
+				pause_menu = null
+				_capture_mouse()
 		# Look around
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and event is InputEventMouseMotion:
 			_rotate_look(event.relative)

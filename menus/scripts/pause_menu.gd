@@ -25,10 +25,11 @@ func _on_resume_pressed() -> void:
 
 func _add_player_to_list(peer_id: int) -> void:
 	var label := Label.new()
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.text = str(peer_id)
 	players_container.add_child(label)
 
 
 func _on_exit_pressed() -> void:
+	MultiplayerService.leave_game()
 	queue_free()
-	# TODO GameMaster.exit_to_main_menu()
