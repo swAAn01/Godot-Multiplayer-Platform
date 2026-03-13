@@ -55,7 +55,7 @@ func host_game(options: HostOptions) -> void:
 		multiplayer.set_multiplayer_peer(peer)
 		lobby_joined.emit()
 	else:
-		push_error("Failed to create game host", err)
+		push_error("Failed to create game host: ", str(err))
 		join_lobby_failed.emit(str(err))
 
 
@@ -69,12 +69,11 @@ func join_game(address: Variant) -> void:
 		multiplayer.set_multiplayer_peer(peer)
 		lobby_joined.emit()
 	else:
-		push_error("Failed to join game.", err)
+		push_error("Failed to join game.", str(err))
 		join_lobby_failed.emit(str(err))
 
 
 func leave_game() -> void:
-	assert(multiplayer.has_multiplayer_peer())
 	close_peer()
 	search_server.stop()
 
