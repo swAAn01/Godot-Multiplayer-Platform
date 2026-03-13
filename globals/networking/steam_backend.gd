@@ -3,6 +3,9 @@ extends MultiplayerBackend
 
 
 const APP_ID := 480
+const CREATE_LOBBY_FAILED := "Failed to Create Steam Lobby."
+const CREATE_HOST_FAILED := "Created Lobby but Failed to Create Host: %s"
+const CREATE_PEER_FAILED := "Joined Lobby but Failed to Create Peer %s"
 
 
 var lobby_id: int
@@ -11,6 +14,17 @@ var lobby_name: String
 
 
 func _ready() -> void:
+	initialize_steam()
+	Steam.lobby_created.connect(_on_lobby_created)
+	Steam.lobby_joined.connect(_on_lobby_joined)
+	Steam.lobby_match_list.connect(_on_lobby_match_list)
+
+
+func _process(_delta: float) -> void:
+	Steam.run_callbacks()
+
+
+static func initialize_steam() -> void:
 	# initialize Steam
 	var steam_init_response := Steam.steamInitEx(APP_ID, false)
 	var status_code: int = steam_init_response['status']
@@ -26,14 +40,6 @@ func _ready() -> void:
 			_:
 				result_msg = "Failed to initialize Steam."
 		push_error(result_msg)
-	# connect Steam signals
-	Steam.lobby_created.connect(_on_lobby_created)
-	Steam.lobby_joined.connect(_on_lobby_joined)
-	Steam.lobby_match_list.connect(_on_lobby_match_list)
-
-
-func _process(_delta: float) -> void:
-	Steam.run_callbacks()
 
 
 func host_game(options: HostOptions) -> void:
@@ -48,8 +54,8 @@ func join_game(address: Variant) -> void:
 
 
 func leave_game() -> void:
-	assert(multiplayer.has_multiplayer_peer())
-	print("Leaving Steam Lobby with id %d" % lobby_id)
+	assert(lobby_id > 0)
+	print("Leaving Steam Lobby with id: %d" % lobby_id)
 	Steam.leaveLobby(lobby_id)
 	lobby_id = 0
 	close_peer()
@@ -60,19 +66,23 @@ func fetch_lobby_list() -> void:
 
 
 func set_joinable(j: bool) -> void:
-	assert(multiplayer.is_server())
 	assert(Steam.getLobbyOwner(lobby_id) == Steam.getSteamID())
 	Steam.setLobbyJoinable(lobby_id, j)
+	joinable = j
 
 
 func get_joinable() -> bool:
 	return joinable
 
 
+## UID is Steam ID 64
 func get_uid(peer_id: int) -> int:
 	return (multiplayer.get_multiplayer_peer() as SteamMultiplayerPeer).get_steam_id_for_peer_id(peer_id)
 
 
+## Username is Steam "persona name".
+## This is only accessible for friends or players in the same lobby,
+## which shouldn't be a problem for our uses.
 func get_username(peer_id: int) -> String:
 	return Steam.getFriendPersonaName(get_uid(peer_id))
 
@@ -82,11 +92,15 @@ func _on_lobby_created(this_connect: int, this_lobby_id: int) -> void:
 		print("Lobby Created with id: %d." % this_lobby_id)
 		Steam.setLobbyData(this_lobby_id, 'name', lobby_name)
 		var peer := SteamMultiplayerPeer.new()
-		peer.create_host(0)
-		multiplayer.set_multiplayer_peer(peer)
+		var err := peer.create_host(0)
+		if err == OK:
+			multiplayer.set_multiplayer_peer(peer)
+		else:
+			push_error(CREATE_HOST_FAILED % str(err))
+			join_lobby_failed.emit(CREATE_HOST_FAILED % str(err))
 	else:
-		push_error("Failed to Create Steam Lobby.")
-		# TODO create lobby failed
+		push_error(CREATE_LOBBY_FAILED)
+		join_lobby_failed.emit(CREATE_LOBBY_FAILED)
 
 
 func _on_lobby_joined(this_lobby_id: int, _p: int, _l: int, response: Steam.ChatRoomEnterResponse) -> void:
@@ -95,8 +109,18 @@ func _on_lobby_joined(this_lobby_id: int, _p: int, _l: int, response: Steam.Chat
 		lobby_id = this_lobby_id
 		if Steam.getLobbyOwner(this_lobby_id) != Steam.getSteamID():
 			var peer := SteamMultiplayerPeer.new()
-			peer.connect_to_lobby(this_lobby_id)
-			multiplayer.set_multiplayer_peer(peer)
+			var err := peer.connect_to_lobby(this_lobby_id)
+			if err == OK:
+				multiplayer.set_multiplayer_peer(peer)
+			else:
+				push_error(CREATE_PEER_FAILED % str(err))
+				join_lobby_failed.emit(CREATE_PEER_FAILED % str(err))
+				leave_game()
+		elif not multiplayer.has_multiplayer_peer() or multiplayer.get_multiplayer_peer() is OfflineMultiplayerPeer:
+			# This case implies that we successfully created a lobby,
+			# but failed to create a [SteamMultiplayerPeer] host in [method _on_lobby_created].
+			# In this case we want to make sure we leave the lobby.
+			leave_game()
 	else:
 		var fail_message := "Failed to join lobby with id: %d. Reason: " % this_lobby_id
 		var fail_reason: String
