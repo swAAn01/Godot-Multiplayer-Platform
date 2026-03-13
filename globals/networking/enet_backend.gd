@@ -74,7 +74,7 @@ func join_game(address: Variant) -> void:
 
 
 func leave_game() -> void:
-	close_peer()
+	_close_peer()
 	search_server.stop()
 
 

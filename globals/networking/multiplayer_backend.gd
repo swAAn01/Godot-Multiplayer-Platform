@@ -33,9 +33,9 @@ func leave_game() -> void
 func fetch_lobby_list() -> void
 
 
-func close_peer() -> void:
+func _close_peer() -> void:
 	if multiplayer.has_multiplayer_peer():
-		multiplayer.multiplayer_peer.close()
+		multiplayer.get_multiplayer_peer().close()
 		multiplayer.set_multiplayer_peer(null)
 
 
