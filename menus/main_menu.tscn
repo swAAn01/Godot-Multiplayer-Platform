@@ -41,7 +41,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Quit"
 
-[node name="JoiningOverlay" type="ColorRect" parent="." unique_id=945041632]
+[node name="PendingOverlay" type="ColorRect" parent="." unique_id=945041632]
 visible = false
 top_level = true
 layout_mode = 1
@@ -53,7 +53,7 @@ grow_vertical = 2
 focus_mode = 1
 color = Color(0.23921569, 0.23921569, 0.23921569, 0.4392157)
 
-[node name="JoiningLabel" type="Label" parent="JoiningOverlay" unique_id=280832995]
+[node name="PendingLabel" type="Label" parent="PendingOverlay" unique_id=280832995]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -70,7 +70,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 128
 text = "Joining Game..."
 
-[node name="FailedLabel" type="Label" parent="JoiningOverlay" unique_id=1842562292]
+[node name="FailedLabel" type="Label" parent="PendingOverlay" unique_id=1842562292]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -87,70 +87,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Failed. Reason:"
 
-[node name="FailedButton" type="Button" parent="JoiningOverlay" unique_id=1191714102]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.5
-offset_top = 236.42499
-offset_right = 45.5
-offset_bottom = 289.425
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Close"
-
-[node name="HostingOverlay" type="ColorRect" parent="." unique_id=1832422597]
-visible = false
-top_level = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-focus_mode = 1
-color = Color(0.23921569, 0.23921569, 0.23921569, 0.4392157)
-
-[node name="JoiningLabel" type="Label" parent="HostingOverlay" unique_id=1791439859]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 128
-text = "Hosting Game..."
-
-[node name="FailedLabel" type="Label" parent="HostingOverlay" unique_id=431293427]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-text = "Failed to create game."
-
-[node name="FailedButton" type="Button" parent="HostingOverlay" unique_id=498706231]
+[node name="FailedButton" type="Button" parent="PendingOverlay" unique_id=1191714102]
 visible = false
 layout_mode = 1
 anchors_preset = 8
