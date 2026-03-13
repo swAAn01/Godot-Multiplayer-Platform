@@ -36,3 +36,16 @@ The `PlayerSpawner` handles the spawning and despawning of player characters. It
 ### `MultiplayerBackend`
 
 `MultiplayerBackend` is an abstract template defining the baseline connection logic needed for most multiplayer games. This project includes `ENetBackend` as an example extension, but `MultiplayerBackend` can be extended to support any backend, such as Steam using Gramps' [`SteamMultiplayerPeer`](https://godotsteam.com/tutorials/multiplayer_peer/).
+
+## Branches
+
+The branches off of `master` in this repository represent additions that depend on addons, and thus don't make sense to include on the main branch. At time of writing this includes `steam-backend`, which is an extension of `MultiplayerBackend` using Gramps' [`SteamMultiplayerPeer`](https://godotsteam.com/tutorials/multiplayer_peer/).
+
+## Planned Features
+
+I want to include examples of other common features, here is what I have planned:
+
+- Proximity Voice Chat
+- Interaction System
+
+If there is a feature you'd like to see included, feel free to open an issue or pull request.
