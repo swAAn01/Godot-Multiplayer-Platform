@@ -13,6 +13,24 @@ This is a remarkably simple example project that includes the following function
 - Synchronized level loading
 - Lobby management (kicking and banning)
 
+## Topology
+
+If you're learning game networking, it's important to understand that this approach is not the only available or correct option. Exposing your players systems' to external traffic is always a big responsibility. Consider the specific needs of your game before commiting to any design pattern.
+
+This example project makes use of the "host-client" model, where one player hosts a game and their computer is used as the server which other players connect to as clients on their respective systems. The host is authoritative over most of the in-game systems, for example the `LevelLoader`, and the clients are authoritative over the players they control. Here are some quick notes on this approach:
+
+Pros:
+- Easy to setup
+- Not dependant on an external server
+- Suitable (and commonly used) for co-op, party, and "friendslop" games
+
+Cons:
+- Not fully server-authoritative
+- No way to prevent cheating
+- Not suitable for competitive games
+
+As of writing, there is no NAT traversal method implemented as part of this project, so you'll have to make use of a LAN connection or implement some solution yourself. The `steam-backend` branch is a WIP.
+
 ## Systems
 
 Here is a brief overview of the systems included in this project and how they work. For details on the implementation, I suggest reading the code for yourself.
