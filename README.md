@@ -15,7 +15,7 @@ This is a remarkably simple example project that includes the following function
 
 ## Topology
 
-If you're learning game networking, it's important to understand that this approach is not the only available or correct option. Exposing your players systems' to external traffic is always a big responsibility. Consider the specific needs of your game before commiting to any design pattern.
+If you're learning game networking, it's important to understand that this approach is not the only available or correct option. Exposing your players' systems to external traffic is always a big responsibility. Consider the specific needs of your game before commiting to any design pattern.
 
 This example project makes use of the "host-client" model, where one player hosts a game and their computer is used as the server which other players connect to as clients on their respective systems. The host is authoritative over most of the in-game systems, for example the `LevelLoader`, and the clients are authoritative over the players they control. Here are some quick notes on this approach:
 
